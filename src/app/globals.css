@@ -1,0 +1,306 @@
+@import "tailwindcss";
+
+/* Dark is the default; `.dark` on <html> is set by the server and corrected by the inline theme script. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: oklch(0.99 0.004 240);
+  --bg-elevated: oklch(1 0 0);
+  --bg-subtle: oklch(0.965 0.008 240);
+  --fg: oklch(0.21 0.03 255);
+  --fg-muted: oklch(0.47 0.03 255);
+  --fg-subtle: oklch(0.5 0.03 255);
+  --border: oklch(0.21 0.03 255 / 0.1);
+  --border-strong: oklch(0.21 0.03 255 / 0.18);
+  --ring: oklch(0.62 0.14 215);
+  --brand: oklch(0.5 0.12 222);
+  --brand-strong: oklch(0.44 0.12 225);
+  --brand-fg: oklch(0.99 0 0);
+  --accent: oklch(0.55 0.2 290);
+  --glow-1: oklch(0.82 0.11 205 / 0.45);
+  --glow-2: oklch(0.75 0.14 290 / 0.3);
+  --grid-dot: oklch(0.21 0.03 255 / 0.12);
+  --code-bg: oklch(0.985 0.005 240);
+  --ok: oklch(0.47 0.13 155);
+  --ok-bg: oklch(0.55 0.14 155 / 0.1);
+  --wip: oklch(0.5 0.12 62);
+  --wip-bg: oklch(0.75 0.15 75 / 0.14);
+  --plan: oklch(0.52 0.17 275);
+  --plan-bg: oklch(0.52 0.17 275 / 0.1);
+  --later: oklch(0.5 0.02 255);
+  --later-bg: oklch(0.5 0.02 255 / 0.1);
+  --bad: oklch(0.52 0.19 25);
+}
+
+.dark {
+  --bg: oklch(0.155 0.022 258);
+  --bg-elevated: oklch(0.19 0.024 258);
+  --bg-subtle: oklch(0.175 0.022 258);
+  --fg: oklch(0.96 0.008 240);
+  --fg-muted: oklch(0.74 0.02 250);
+  --fg-subtle: oklch(0.68 0.02 250);
+  --border: oklch(1 0 0 / 0.08);
+  --border-strong: oklch(1 0 0 / 0.15);
+  --ring: oklch(0.78 0.13 205);
+  --brand: oklch(0.8 0.13 200);
+  --brand-strong: oklch(0.86 0.12 195);
+  --brand-fg: oklch(0.17 0.03 255);
+  --accent: oklch(0.72 0.17 290);
+  --glow-1: oklch(0.7 0.14 205 / 0.32);
+  --glow-2: oklch(0.6 0.2 290 / 0.26);
+  --grid-dot: oklch(1 0 0 / 0.07);
+  --code-bg: oklch(0.13 0.02 258);
+  --ok: oklch(0.8 0.16 155);
+  --ok-bg: oklch(0.8 0.16 155 / 0.12);
+  --wip: oklch(0.85 0.14 80);
+  --wip-bg: oklch(0.85 0.14 80 / 0.12);
+  --plan: oklch(0.78 0.12 275);
+  --plan-bg: oklch(0.78 0.12 275 / 0.13);
+  --later: oklch(0.72 0.02 255);
+  --later-bg: oklch(0.72 0.02 255 / 0.12);
+  --bad: oklch(0.72 0.17 25);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-bg-subtle: var(--bg-subtle);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-ring: var(--ring);
+  --color-brand: var(--brand);
+  --color-brand-strong: var(--brand-strong);
+  --color-brand-fg: var(--brand-fg);
+  --color-accent: var(--accent);
+  --color-code-bg: var(--code-bg);
+  --color-ok: var(--ok);
+  --color-ok-bg: var(--ok-bg);
+  --color-wip: var(--wip);
+  --color-wip-bg: var(--wip-bg);
+  --color-plan: var(--plan);
+  --color-plan-bg: var(--plan-bg);
+  --color-later: var(--later);
+  --color-later-bg: var(--later-bg);
+  --color-bad: var(--bad);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+@theme {
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-wave: wave 18s linear infinite;
+  --animate-wave-slow: wave 28s linear infinite;
+  --animate-pulse-dot: pulse-dot 2.4s ease-in-out infinite;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(-1.5deg);
+    }
+    50% {
+      transform: translateY(-10px) rotate(-0.5deg);
+    }
+  }
+  @keyframes wave {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes pulse-dot {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 color-mix(in oklch, var(--wip) 55%, transparent);
+    }
+    50% {
+      box-shadow: 0 0 0 6px transparent;
+    }
+  }
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+  body {
+    /* clip, not hidden: never scroll sideways, and position: sticky keeps working. */
+    overflow-x: clip;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: color-mix(in oklch, var(--brand) 35%, transparent);
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  [id] {
+    scroll-margin-top: 6rem;
+  }
+}
+
+@layer components {
+  .text-gradient {
+    background: linear-gradient(100deg, var(--brand) 10%, var(--accent) 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Dot grid that fades out toward the edges. */
+  .bg-dots {
+    background-image: radial-gradient(var(--grid-dot) 1px, transparent 1px);
+    background-size: 22px 22px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 30%, transparent 75%);
+  }
+
+  .hero-glow {
+    background:
+      radial-gradient(40% 50% at 25% 20%, var(--glow-1), transparent 70%),
+      radial-gradient(35% 45% at 80% 15%, var(--glow-2), transparent 70%);
+    filter: blur(20px);
+  }
+
+  /* 1px gradient border for highlighted cards. */
+  .border-gradient {
+    border: 1px solid transparent;
+    background:
+      linear-gradient(var(--bg-elevated), var(--bg-elevated)) padding-box,
+      linear-gradient(140deg, color-mix(in oklch, var(--brand) 70%, transparent), var(--border) 40%, color-mix(in oklch, var(--accent) 60%, transparent)) border-box;
+  }
+
+  .card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+  }
+
+  /* Shiki dual themes: light colors inline, dark colors swapped in under .dark. */
+  .shiki,
+  .shiki span {
+    color: var(--shiki-light);
+    background-color: transparent !important;
+  }
+  .dark .shiki,
+  .dark .shiki span {
+    color: var(--shiki-dark);
+  }
+  .shiki {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    line-height: 1.7;
+    tab-size: 4;
+  }
+
+  .prose-nami {
+    color: var(--fg-muted);
+    line-height: 1.75;
+  }
+  .prose-nami :where(h2) {
+    color: var(--fg);
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin: 2.5rem 0 0.75rem;
+  }
+  .prose-nami :where(h3) {
+    color: var(--fg);
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 2rem 0 0.5rem;
+  }
+  .prose-nami :where(p, ul, ol, pre) {
+    margin: 1rem 0;
+  }
+  .prose-nami :where(ul) {
+    list-style: disc;
+    padding-left: 1.25rem;
+  }
+  .prose-nami :where(ol) {
+    list-style: decimal;
+    padding-left: 1.25rem;
+  }
+  .prose-nami :where(li) {
+    margin: 0.35rem 0;
+  }
+  .prose-nami :where(a) {
+    color: var(--brand);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prose-nami :where(strong) {
+    color: var(--fg);
+  }
+  .prose-nami :where(code):not(pre code) {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    color: var(--fg);
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    border-radius: 0.375rem;
+    padding: 0.1em 0.35em;
+  }
+  .prose-nami :where(pre) {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+  }
+}
+
+/* Scroll reveal: progressive enhancement where scroll-driven animations exist. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+  }
+}
+/* Transform only: fading would lower text contrast mid-animation. */
+@keyframes reveal {
+  from {
+    transform: translateY(28px) scale(0.985);
+  }
+  to {
+    transform: none;
+  }
+}
+
+/* Feature filter: the client component sets data-filter; CSS does the hiding. */
+[data-filter="available"] [data-status]:not([data-status="available"]),
+[data-filter="in-progress"] [data-status]:not([data-status="in-progress"]),
+[data-filter="roadmap"] [data-status]:not([data-status="roadmap"]) {
+  display: none;
+}
+[data-filter="available"] [data-count-available="0"],
+[data-filter="in-progress"] [data-count-in-progress="0"],
+[data-filter="roadmap"] [data-count-roadmap="0"] {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "name": "getnami",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Website for Nami, the open-source multi-tenant identity provider for .NET (getnami.dev).",
+  "license": "Apache-2.0",
+  "packageManager": "pnpm@12.9.1",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build && node --env-file-if-exists=.env --env-file-if-exists=.env.production --env-file-if-exists=.env.local scripts/postbuild.mjs",
+    "preview": "wrangler pages dev out --port 8788",
+    "lint": "eslint .",
+    "typecheck": "next typegen && tsc --noEmit",
+    "check:content": "tsx scripts/check-content.ts",
+    "check:copy": "node scripts/check-copy.mjs",
+    "check:output": "node --env-file-if-exists=.env --env-file-if-exists=.env.production --env-file-if-exists=.env.local scripts/check-output.mjs",
+    "check": "pnpm lint && pnpm typecheck && pnpm check:content && pnpm build && pnpm check:copy && pnpm check:output",
+    "deploy": "wrangler pages deploy out --project-name=getnami"
+  },
+  "dependencies": {
+    "@mdx-js/loader": "^3.1.1",
+    "@mdx-js/react": "^3.1.1",
+    "@next/mdx": "16.4.0",
+    "@types/mdx": "^2.0.14",
+    "geist": "^1.7.2",
+    "lucide-react": "1.52.0",
+    "next": "16.4.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "shiki": "4.5.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/turbopack": "4.3.3",
+    "@types/node": "^24.19.1",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.4.0",
+    "linkinator": "^8.1.0",
+    "schema-dts": "^2.1.0",
+    "tailwindcss": "4.3.3",
+    "tsx": "^4.23.15",
+    "typescript": "5.9.3",
+    "wrangler": "4.148.0"
+  }
+}

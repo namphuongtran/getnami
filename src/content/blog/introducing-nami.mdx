@@ -1,0 +1,40 @@
+Identity is the one service every other service depends on. For .NET teams, the choice has usually been between three options: license a commercial identity server, rent a hosted identity service priced per monthly user, or build the pieces yourself on top of a protocol library.
+
+Nami is a fourth option: **a complete, open-source identity provider for .NET, licensed under Apache-2.0, with no license keys, no production gates and no paid tiers on the core.**
+
+## What Nami is
+
+Nami is an OAuth 2.0 and OpenID Connect authorization server. It issues tokens to your web apps, mobile apps, services and APIs. Under the hood it uses [OpenIddict](https://documentation.openiddict.com/), a mature open-source protocol engine, and adds the product layer that teams otherwise build by hand:
+
+- **Multi-tenancy by design.** Each tenant has its own issuer, resolved from the host name or the path. Tenants share a pooled PostgreSQL database or get a dedicated silo, and row-level security enforces isolation even if application code makes a mistake.
+- **Keys that manage themselves.** The first signing key is created at startup and stored encrypted with ASP.NET Core Data Protection. Rotation without restarts is next.
+- **Secure defaults that cannot be switched off by accident.** PKCE is required with S256 only. The implicit and password grants do not exist. The server refuses to start on an unsafe configuration.
+- **Evidence you can verify.** Audit events are hash-chained, so tampering with the record shows up.
+
+## What works today
+
+Milestone M1, the core protocol server, is built. The reference host runs the authorization code flow with PKCE, client credentials, rolling refresh tokens with reuse detection, introspection and revocation, all against per-tenant issuers on PostgreSQL 18. The suite that proves it ran 1,022 tests on 2026-10-04: unit, contract, architecture and integration tests against a real database.
+
+```csharp
+builder.Services.AddNamiIdentity(_ => { })
+    .AddEntityFrameworkStores()
+    .UsePostgreSQL()
+    .AddMultiTenant()
+    .AddKeys()
+    .AddClientDefinitions(builder.Configuration.GetSection("Nami:Clients"))
+    .AddScopeDefinitions(builder.Configuration.GetSection("Nami:Scopes"));
+```
+
+## What comes next
+
+Milestone M2 is in progress: ASP.NET Core Identity users, TOTP with recovery codes, passkeys on the native .NET 10 support, external identity providers and server-side sessions, followed by the login and consent pages and a `docker compose up` quickstart.
+
+After that come key rotation and observability (M3), the admin API and app with DPoP, mutual TLS, PAR, device flow and token exchange (M4), and OpenID certification with a migration guide from commercial identity servers (M5). The [roadmap](/roadmap/) tracks every feature with its real status.
+
+## How we build it
+
+Every architectural decision is written down as a decision record, over a hundred of them so far. Risky integrations were proven with running code before we committed to them. Dependencies are permissive open source only. And the site you are reading labels every feature as available, in progress or planned, checked against the source.
+
+## Get involved
+
+We are looking for early adopters and design partners: teams on .NET who want to own their identity layer and help decide what ships first. [Talk to us](/contact/).

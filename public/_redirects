@@ -1,0 +1,5 @@
+# Cloudflare Pages redirects. Short links for talks, slides and social posts.
+/github https://github.com/namphuongtran/nami 302
+/discussions https://github.com/namphuongtran/nami/discussions 302
+/early-access /contact/ 302
+/enterprise /contact/ 302

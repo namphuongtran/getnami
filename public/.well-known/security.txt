@@ -1,0 +1,5 @@
+Contact: mailto:me@getnami.dev
+Expires: 2027-10-09T00:00:00.000Z
+Preferred-Languages: en, vi
+Canonical: https://getnami.dev/.well-known/security.txt
+Policy: https://getnami.dev/security/
