@@ -42,3 +42,17 @@ These mirror the Nami repository's own rules and are enforced by `pnpm check:cop
 
 `pnpm check` runs lint, typecheck, content checks, the build, and the copy and output checks.
 `pnpm preview` serves `out/` with Cloudflare's header and redirect handling on port 8788.
+
+## Agent skills
+
+### Issue tracker
+
+Issues live in GitHub Issues for `namphuongtran/getnami`, managed with the `gh` CLI. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+The five default triage labels, each named after its role (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`). See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context: one `CONTEXT.md` and `docs/adr/` at the repo root. See `docs/agents/domain.md`.
