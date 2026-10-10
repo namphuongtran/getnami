@@ -14,10 +14,11 @@ export function RoadmapTimeline() {
           <li key={milestone.id} className="reveal relative">
             <div
               className={cn(
-                "relative z-10 flex size-10 items-center justify-center rounded-full border font-mono text-xs font-semibold",
-                status === "available" && "border-ok/40 bg-ok-bg text-ok",
-                status === "in-progress" && "border-wip/50 bg-wip-bg text-wip",
-                status === "roadmap" && "border-border-strong bg-bg-elevated text-fg-muted",
+                // The tints are translucent, so they sit over an opaque base to hide the line behind.
+                "relative z-10 flex size-10 items-center justify-center rounded-full border bg-bg-elevated bg-gradient-to-b font-mono text-xs font-semibold",
+                status === "available" && "border-ok/40 from-ok-bg to-ok-bg text-ok",
+                status === "in-progress" && "border-wip/50 from-wip-bg to-wip-bg text-wip",
+                status === "roadmap" && "border-border-strong text-fg-muted",
               )}
             >
               {milestone.id}
